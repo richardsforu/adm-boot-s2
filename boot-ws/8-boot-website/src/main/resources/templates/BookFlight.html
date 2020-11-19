@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2 align="center">Flight Information</h2>
+	<hr />
+
+<div th:with="passengers=${numberofPassengers}"></div>
+	
+	<table border="1" align="center">
+	
+	<thead>
+	<tr>
+		<th>Flight Number</th>
+		<th>From</th>
+		<th>To</th>
+		<th>Date</th>
+		<th>Time</th>
+		<th>Duration</th>
+		<th>Fare</th>
+		<th>Total Fare</th>
+	</tr>
+	
+	</thead>
+	
+	<tbody>
+	
+	<tr>
+	<td th:text="${uidata.flight.flightNumber}"/>
+		<td th:text="${uidata.flight.origin}"/>
+		<td th:text="${uidata.flight.destination}"/>
+		<td th:text="${uidata.flight.flightDate}"/>
+		<td th:text="${uidata.flight.flightTime}"/>
+		<td th:text="${uidata.flight.duration}"/>
+		<td th:text="${uidata.flight.fares}"/>
+		<td th:text="${uidata.flight.fares}* ${numberofPassengers}"/>
+		
+	</tr>
+	</tbody>
+	
+	</table>
+	
+	<hr/>
+	
+		<h2 align="center">Primary Passenger Information</h2>
+	
+	
+	
+	<form th:action="@{/bookFlight(id=${uidata.flight.id},numberofPassengers=${numberofPassengers})}" th:object="${uidata}" method="post">
+	
+	<table align="center">
+	
+	<tr>
+		<td>Mobile Number </td>
+		<td> <input type="text" th:field="*{passenger.mobileNumber}"/></td>
+	</tr>
+	
+	<tr>
+		<td>Email Address </td>
+		<td> <input type="email" th:field="*{passenger.emailAddress}"/></td>
+	</tr>
+	
+	<tr>
+		<td>First Name </td>
+		<td> <input type="text" th:field="*{passenger.firstName}"/></td>
+	</tr>
+	
+	<tr>
+		<td>Last Name </td>
+		<td> <input type="text" th:field="*{passenger.lastName}"/></td>
+	</tr>
+	
+	<tr>
+		<td>Gender </td>
+		<td> 
+		<input type="radio" th:field="*{passenger.gender}" th:value="Male">Male
+		<input type="radio" th:field="*{passenger.gender}" th:value="Female">Female
+		</td>
+	</tr>
+	
+	</table>
+	
+	
+			
+		<div th:if="${numberofPassengers >= 2}">
+		
+					<h2 align="center">Co-Passenger Information</h2>
+					
+					<table align="center">
+					<th:block th:each="i,state:${#numbers.sequence(0,numberofPassengers-2)}">
+					<tr>
+						<th>Passenger <span th:text="${state.count+1}"></span> :</th>
+						<td>First Name: <input type="text" th:name="passenger.coPassengers[__${state.index}__].firstName"/></td>
+						<td>Last Name: <input type="text" th:name="passenger.coPassengers[__${state.index}__].lastName"/></td>
+						<td>Gender</td>
+						<td>
+							<input type="radio" th:name="passenger.coPassengers[__${state.index}__].gender" th:value="Male">Male
+							<input type="radio" th:name="passenger.coPassengers[__${state.index}__].gender" th:value="Male">Female
+							
+					</tr>
+					</th:block>
+					
+					<tr>
+						<th colspan="10">
+						<input type="submit" value="Book"/>
+						<input type="reset" value="Clear All"/>
+						 </th>
+					
+					</tr>
+					
+					
+					
+					</table>
+
+		
+		</div>
+			
+	
+	
+	
+	
+	</form>
+	
+	
+		
+		
+</body>
+</html>

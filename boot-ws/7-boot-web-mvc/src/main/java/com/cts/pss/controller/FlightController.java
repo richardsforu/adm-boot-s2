@@ -9,8 +9,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cts.pss.entity.Flight;
 
@@ -66,20 +68,36 @@ public class FlightController {
 
 	// load form
 	@RequestMapping("/loadForm")
-	public String f6() {
+	public String f6(Model model) {
+		Flight flight=new Flight();
+		model.addAttribute("flight", flight);
+
 		return "Form";
 	}
 
 	@RequestMapping("/s6")
-	public String f7(@RequestParam("origin") String origin, @RequestParam("destination") String destination,
+	public ModelAndView f7(@RequestParam("origin") String origin, @RequestParam("destination") String destination,
 			@RequestParam("flightDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate flightDate) {
-
-		System.out.println(">>>>>> FORM Submited <<<<<<<");
-		System.out.println("Origin: " + origin);
-		System.out.println("Destination: " + destination);
-		System.out.println("Flight Date: " + flightDate);
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-		return "";
+		
+		
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("Form");
+		
+		mav.addObject("origin", origin);
+		mav.addObject("destination",destination);
+		mav.addObject("flightDate",flightDate);	
+		return mav;
 	}
+	
+	@RequestMapping("/s7")
+	public String f8(@ModelAttribute Flight flight,Model model) {
+		
+		model.addAttribute("flight", flight);
+		
+		return "Form";
+	}
+	
+	
+	
 
 }

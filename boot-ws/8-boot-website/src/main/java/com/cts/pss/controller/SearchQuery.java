@@ -1,48 +1,27 @@
-package com.cts.pss.entity;
+package com.cts.pss.controller;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class Flight {
+public class SearchQuery {
 
-	private long id;
-	private String flightNumber;
 	private String origin;
 	private String destination;
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate flightDate;
-	private LocalTime flightTime;
+	private int numberofPassengers;
 
-	public Flight() {
+	public SearchQuery() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Flight(long id, String flightNumber, String origin, String destination, LocalDate flightDate,
-			LocalTime flightTime) {
-		this.id = id;
-		this.flightNumber = flightNumber;
+	public SearchQuery(String origin, String destination, LocalDate flightDate, int numberofPassengers) {
+		super();
 		this.origin = origin;
 		this.destination = destination;
 		this.flightDate = flightDate;
-		this.flightTime = flightTime;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getFlightNumber() {
-		return flightNumber;
-	}
-
-	public void setFlightNumber(String flightNumber) {
-		this.flightNumber = flightNumber;
+		this.numberofPassengers = numberofPassengers;
 	}
 
 	public String getOrigin() {
@@ -69,12 +48,12 @@ public class Flight {
 		this.flightDate = flightDate;
 	}
 
-	public LocalTime getFlightTime() {
-		return flightTime;
+	public int getNumberofPassengers() {
+		return numberofPassengers;
 	}
 
-	public void setFlightTime(LocalTime flightTime) {
-		this.flightTime = flightTime;
+	public void setNumberofPassengers(int numberofPassengers) {
+		this.numberofPassengers = numberofPassengers;
 	}
 
 }

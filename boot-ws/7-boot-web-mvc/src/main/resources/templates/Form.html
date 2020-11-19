@@ -1,21 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Welcome to Spring Web MVC</h1> <hr/>
+	<h1>Welcome to Spring Web MVC</h1>
+	<hr />
 
-<form action="/s6" method="post">
-<input placeholder="From" name="origin"> <br/>
-<input placeholder="To" name="destination"> <br/>
-<input type="date" name="flightDate"> <br/>
-
-
-<button>Search</button>
+	<form action="/s7" method="post">
+		<input placeholder="From" name="origin"> <br /> <input
+			placeholder="To" name="destination"> <br /> <input
+			type="date" name="flightDate"> <br />
 
 
-</form>
+		<button>Search</button>
+
+		<hr />
+
+		<table border="1">
+			<thead>
+				<tr>
+
+					<th>Origin</th>
+					<th>Destination</th>
+					<th>Flight Date</th>
+
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					<td th:text="${flight.origin}"></td>
+					<td th:text="${flight.destination}"></td>
+					<td th:text="${flight.flightDate}"></td>
+
+				</tr>
+			</tbody>
+
+
+		</table>
+
+
+
+	</form>
 </body>
 </html>
